@@ -28,14 +28,19 @@ export const registerAction = (registerValues) => {
 }
 
 export const getUserData = () => {
-
-    return function(dispatch){
-        console.log("test");
+    return function (dispatch) {
         API.get("api/user").then(response => {
-           dispatch({
-               type: "SET_USER_DATA",
-               payload: response.data
-           });
-        });
+            console.log("login ok");
+            dispatch({
+                type: "SET_USER_DATA",
+                payload: response.data
+            });
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+            .then(function () {
+                console.log("always test");
+            });;
     }
 }
