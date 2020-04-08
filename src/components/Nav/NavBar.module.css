@@ -1,0 +1,17 @@
+.Nav{
+    height: 70px;
+    background-color: #fcfcf8;
+}
+
+.Navlist{
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.Navitem:first-child{
+    padding-right: 24px;
+}
+
