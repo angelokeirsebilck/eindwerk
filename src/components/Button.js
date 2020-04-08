@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './Button.module.css';
+import { Link } from 'react-router-dom';
 
 export default class Button extends Component {
 
     render() {
-        const { text } = this.props;
+        const { text, link } = this.props;
         return (
-            <button className={classes.Button}>
+            <Link to={link} className={classes.Button}>
                 {text}
-            </button>
+            </Link>
         )
     }
 }
 
 Button.propTypes = {
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired
 };

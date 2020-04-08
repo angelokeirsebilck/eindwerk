@@ -18,4 +18,5 @@
 .Button:hover{
     background-color: #00255a;
     color: white;
+    text-decoration: none;
 }
