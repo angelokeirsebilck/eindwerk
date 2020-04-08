@@ -9,14 +9,14 @@ import Page404 from './pages/Page404';
 import { API, TOKEN } from "./config/API";
 import Login from './pages/Login';
 import { connect } from 'react-redux';
-import { loginAction, getUserData } from './redux/actions/authActions';
+import { loginAction, setUserData } from './redux/actions/authActions';
 
 class App extends Component {
 
   componentDidMount() {
     if (TOKEN) {
       // Als er een token is (uit local storage) dan gaan we de gebruikersgevens ophalen
-      this.props.getUserData();
+      this.props.setUserData();
     }
   }
 
@@ -46,7 +46,7 @@ const MapStateToProps = (state) => {
 const MapDispatchToProps = (dispatch) => {
   return {
     loginAction: (response) => dispatch(loginAction(response)),
-    getUserData: () => dispatch(getUserData())
+    setUserData: () => dispatch(setUserData())
   }
 }
 

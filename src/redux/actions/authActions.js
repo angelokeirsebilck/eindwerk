@@ -16,8 +16,20 @@ export const loginAction = (loginValues) => dispatch => {
 
         // Na het juist instellen van alles kunnen we gaan ophalen wie er is ingelogd om dit dan weer te geven op
         // de pagina
-        dispatch(getUserData());
+        dispatch(setUserData());
     });
+}
+
+export const logoutAction = () => dispatch => {
+    // Ook bij logout doen we eigenlijk 3 dingen, namelijk het omgekeerde van de login.
+    // We verwijderen de token uit localstorage, zodanig dat een user niet opnieuw is ingelogd na een page refresh
+    window.localStorage.setItem("LOGIN_OAUTHTOKEN", undefined);
+
+    // We verwijderen de token uit onze API calls voor de huidige sessie.
+    API.defaults.headers.common['Authorization'] = undefined;
+
+    // We verwijderen de user uit de state
+    dispatch(deleteUserData());
 }
 
 export const registerAction = (registerValues) => {
@@ -27,7 +39,13 @@ export const registerAction = (registerValues) => {
     });
 }
 
-export const getUserData = () => {
+export const deleteUserData = () => {
+    return {
+        type: "DELETE_USER_DATA"
+    }
+}
+
+export const setUserData = () => {
     return function (dispatch) {
         API.get("api/user").then(response => {
             dispatch({

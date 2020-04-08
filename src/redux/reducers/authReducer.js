@@ -7,6 +7,9 @@ const authReducer = (state = initialState, action) => {
         case 'SET_USER_DATA':
             console.log("set_userdata_reducer");
             return { user: action.payload };
+        case 'DELETE_USER_DATA':
+            console.log("delete_userdate_reducer");
+            return { initialState };
     }
 
     return state;
