@@ -17,7 +17,7 @@ class Register extends Component {
             "avatar": "https://api.adorable.io/avatars/285/" + document.querySelector("[name=email]").value
         }
 
-        this.props.registerAction(registerValues)
+        this.props.registerAction(registerValues,this.props.history)
     }
 
     validateHandler = (values) => {
@@ -61,7 +61,7 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        registerAction: (registerValues) => dispatch( registerAction(registerValues))
+        registerAction: (registerValues,history) => dispatch( registerAction(registerValues,history))
     }
 }
 

@@ -1,4 +1,3 @@
-import Axios from "axios";
 import { API } from '../../config/API';
 
 export const loginAction = (loginValues) => dispatch => {
@@ -32,10 +31,10 @@ export const logoutAction = () => dispatch => {
     dispatch(deleteUserData());
 }
 
-export const registerAction = (registerValues) => {
+export const registerAction = (registerValues, history) => {
     API.post("api/users", registerValues).then(response => {
-        // ---------------Nog redirecten nar login page
-        alert(response.statusText);
+        //Redirect naar login page
+        history.push("/login");
     });
 }
 
