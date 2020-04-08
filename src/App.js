@@ -16,7 +16,7 @@ class App extends Component {
   componentDidMount() {
     if (TOKEN) {
       // Als er een token is (uit local storage) dan gaan we de gebruikersgevens ophalen
-      getUserData();
+      this.props.getUserData();
     }
   }
 
@@ -45,7 +45,8 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
   return {
-    loginAction: (response) => dispatch(loginAction(response))
+    loginAction: (response) => dispatch(loginAction(response)),
+    getUserData: () => dispatch(getUserData())
   }
 }
 

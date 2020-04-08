@@ -3,7 +3,6 @@ const initialState = {
 };
 
 const authReducer = (state = initialState, action) => {
-    console.log("enter auth reducer");
     switch (action.type) {
         case 'SET_USER_DATA':
             console.log("set_userdata_reducer");
