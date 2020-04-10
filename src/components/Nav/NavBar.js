@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import classes from './NavBar.module.css';
-import Button from '../Button';
+import Button from '../Button/Button';
 import { connect } from 'react-redux';
 import { logoutAction } from '../../redux/actions/authActions';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
 
     render() {
         const containerStyle = {
-            height: '100%'
+            height: '100%',
+            display: 'flex'
         }
 
         let isLoggedIn = false;
@@ -20,6 +22,7 @@ class NavBar extends Component {
         return (
             <nav className={classes.Nav}>
                 <div className="container" style={containerStyle}>
+                    <Link to="/" className={classes.HomeLink}>HOME</Link>
                     {isLoggedIn ?
                         <ul className={classes.Navlist}>
                             <li className={classes.Navitem}>
