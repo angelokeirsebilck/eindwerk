@@ -11,7 +11,8 @@ class Home extends Component {
     }
 
     handlePageClick = data => {
-        this.props.loadPosts(this.props.pageCount - data.selected);
+        //this.props.loadPosts(this.props.pageCount - data.selected);
+        this.props.loadPosts(data.selected + 1);
       };
 
     render() {

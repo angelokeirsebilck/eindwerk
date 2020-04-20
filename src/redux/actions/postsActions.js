@@ -3,7 +3,6 @@ import { API } from '../../config/API';
 export const loadPosts = (pageNumber) => {
     return function (dispatch) {
         API.get("api/posts?page=" + pageNumber).then(response => {
-            console.log(response);
             dispatch({
                 type: "LOAD_POSTS",
                 payload: response.data
@@ -22,7 +21,7 @@ export const loadPageCount = () => {
                 type: "LOAD_PAGE_COUNT",
                 payload: response.data
             });
-            dispatch(loadPosts(response.data.last_page));
+            dispatch(loadPosts(1));
         }).catch(function (error) {
             // handle error
             console.log(error);
