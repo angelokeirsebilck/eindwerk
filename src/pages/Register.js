@@ -8,31 +8,17 @@ import * as Yup from 'yup';
 
 class Register extends Component {
 
-    subimitHandler = () => {
+    subimitHandler = (values) => {
         const registerValues = {
-            "first_name": document.querySelector("[name=firstname]").value,
-            "last_name": document.querySelector("[name=lastname]").value,
-            "email": document.querySelector("[name=email]").value,
-            "password": document.querySelector("[name=password]").value,
+            "first_name": values.firstname,
+            "last_name": values.lastname,
+            "email": values.email,
+            "password": values.password,
             "favorite_color": "#f9a373",
-            "avatar": "https://api.adorable.io/avatars/285/" + document.querySelector("[name=email]").value
+            "avatar": "https://api.adorable.io/avatars/285/" + values.email
         }
 
         this.props.registerAction(registerValues, this.props.history)
-    }
-
-    validateHandler = (values) => {
-        const errors = {};
-
-        const requiredFields = ["firstname", "lastname", "email"];
-
-        requiredFields.forEach(field => {
-            if (!values[field]) {
-                errors[field] = "required";
-            }
-        });
-
-        return errors
     }
 
     validationShema = Yup.object().shape({
