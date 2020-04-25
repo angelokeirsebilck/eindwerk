@@ -1,7 +1,46 @@
 .Post{
     background-color: #fcfcf8;
+    margin-bottom: 10px;
+    padding: 24px;
+}
+
+.Post_link{
+    color: #00255a;
+}
+
+.Post_link:hover{
+    color: #00255a;
+    text-decoration: none;
+}
+
+.Post_link:hover {
+    color: #00255a;
+    text-decoration: none;
+}
+
+.Post_link:hover .Post_title {
+    color: #f9a373;
+}
+
+.Post_link:hover .Post_body {
+    color: #f9a373;
 }
 
 .Post_title{
     font-size: 24px;
+    transition: .4s all;
+}
+
+.Post_body{
+    transition: .4s all;
+}
+
+.Post_username{
+    color: #f9a373;
+    transition: .4s all;
+}
+
+.Post_username:hover{
+    color: #00255a;
+    text-decoration: none;
 }
