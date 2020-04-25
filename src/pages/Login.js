@@ -1,50 +1,43 @@
 import React, { Component } from 'react'
-import RegisterForm from '../components/RegisterForm'
 import { Formik } from 'formik';
-import { API } from '../config/API';
 import { connect } from 'react-redux';
 import { loginAction } from '../redux/actions/authActions';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/Forms/LoginForm';
+import * as Yup from 'yup';
 
 class Login extends Component {
     subimitHandler = (values) => {
+        console.log(values);
         const loginValues = {
             'grant_type': 'password',
             'client_id': 2,
             'client_secret': 'iwrHFPcaiQ3bZTzHEwQpYkpiuHUlbIOJ9SAI6DLI',
-            "username": document.querySelector("[name=email]").value,
-            "password": document.querySelector("[name=password]").value,
+            "username": values[0],
+            "password": values[1],
         }
 
         this.props.loginAction(loginValues);
     }
 
-    validateHandler = (values) => {
-        const errors = {};
-
-        const requiredFields = ["email","password"];
-
-        requiredFields.forEach(field => {
-            if (!values[field]) {
-                errors[field] = "required";
-            }
-        });
-
-        return errors
-    }
+    validationShema = Yup.object().shape({
+        email: Yup.string()
+            .required('Firstname is required'),
+        password: Yup.string()
+            .required('Password is required')
+    })
 
     render() {
         return (
             <div className="container">
                 <Formik
                     onSubmit={this.subimitHandler}
-                    validate={this.validateHandler}
+                    validationSchema={this.validationShema}
                     initialValues={{
 						email: '',
 						password: ''
 					}}
                 >
-                    <LoginForm />
+                    {props => <LoginForm {...props} />}
                 </Formik>
             </div>
         )
