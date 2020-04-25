@@ -13,10 +13,27 @@
     transition: .4s all;
     font-family: 'Montserrat';
     text-transform: lowercase;
+    display: inline-block;
 }
 
 .Button:hover{
     background-color: #00255a;
     color: white;
     text-decoration: none;
+}
+
+.Button_mobile{
+    color: #00255a !important;
+    padding:0;
+    background-color: white;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    transition: .4s all;
+    font-family: 'Montserrat';
+    text-transform: lowercase;
+    display: inline-block;
 }

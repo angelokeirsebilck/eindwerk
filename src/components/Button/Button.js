@@ -6,9 +6,16 @@ import { Link } from 'react-router-dom';
 export default class Button extends Component {
 
     render() {
-        const { text, link } = this.props;
+        const { text, link, mobile } = this.props;
+
+        let btnClass = [];
+        btnClass.push(classes.Button);
+
+        if(mobile){
+            btnClass.push(classes.Button_mobile);
+        }
         return (
-            <Link to={link} className={classes.Button}>
+            <Link to={link}  className={btnClass.join(' ')}>
                 {text}
             </Link>
         )
