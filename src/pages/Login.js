@@ -7,13 +7,12 @@ import * as Yup from 'yup';
 
 class Login extends Component {
     subimitHandler = (values) => {
-        console.log(values);
         const loginValues = {
             'grant_type': 'password',
             'client_id': 2,
             'client_secret': 'iwrHFPcaiQ3bZTzHEwQpYkpiuHUlbIOJ9SAI6DLI',
-            "username": values[0],
-            "password": values[1],
+            "username": values.email,
+            "password": values.password,
         }
 
         this.props.loginAction(loginValues);
