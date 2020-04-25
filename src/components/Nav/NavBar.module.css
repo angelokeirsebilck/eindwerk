@@ -3,7 +3,11 @@
     background-color: #fcfcf8;
 }
 
-.Navlist{
+.Nav_mobile{
+    display: none;
+}
+
+.Nav_list{
     list-style-type: none;
     display: flex;
     justify-content: flex-end;
@@ -12,11 +16,132 @@
     margin-left: auto;
 }
 
-.Navitem:first-child{
+.Nav_mobile_list{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: auto;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 0;
+    justify-content: center;
+}
+
+.Nav_mobile_item{
+
+}
+
+.Nav_item_dropdown{
+    height: 50px;
+    width: 50px;
+    position: relative;
+}
+
+.Nav_item_dropdown:hover .Nav_dropdown{
+    visibility: visible;
+    opacity: 1;
+}
+
+.Nav_item:first-child{
     padding-right: 24px;
 }
 
-.HomeLink{
-    align-self: center;
+.Nav_image{
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    display: block;
 }
+
+.Nav_dropdown{
+    visibility: hidden;
+    opacity: 0;
+    transition: .4s all;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    z-index: 5;
+}
+
+.Home_link{
+    align-self: center;
+    color: #00255a;
+    font-weight: 500;
+    text-decoration: none;
+    transition: .4s all;
+}
+
+.Home_link:hover{
+    align-self: center;
+    color: #f9a373;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.Button_primary{
+    padding:10px 16px;
+    border-radius: 0px;
+    border: 0px;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    background-color: #f9a373;
+    transition: .4s all;
+    font-family: 'Montserrat';
+    text-transform: lowercase;
+    display: inline-block;
+}
+
+.Button_mobile{
+    border-radius: 0px;
+    border: 0px;
+    color: #00255a !important;
+    background: white;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    transition: .4s all;
+    font-family: 'Montserrat';
+    text-transform: lowercase;
+    display: inline-block;
+}
+
+.Button_primary:hover{
+    background-color: #00255a;
+    color: white;
+    text-decoration: none;
+}
+
+.container_nav{
+    height: 100%;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .Nav_item{
+        display: none;
+    }
+
+    .Nav_item_dropdown{
+        display: none;
+    }
+
+    .Nav_mobile{
+        display: block;
+    }
+  }
 
