@@ -13,6 +13,15 @@ class PostDetails extends Component {
         comment: ''
     }
 
+    onDeletePostHandler = () => {
+        API.delete("api/posts/" + this.props.match.params.post).then(response => {
+            this.props.history.push("/");
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
+        });
+    }
+
     componentDidMount() {
         this.props.loadPost(this.props.match.params.post);
     }
@@ -59,6 +68,7 @@ class PostDetails extends Component {
                     <div className="container">Post still loading..</div>
                     :
                     <div className="container">
+                        <button onClick={this.onDeletePostHandler}>Delete post</button>
                         <PostDetailsItem
                             id={post.id}
                             title={post.title}
@@ -72,21 +82,11 @@ class PostDetails extends Component {
                                 <button onClick={this.onAddCommentHandler}>Add Comment</button>
                                 <CKEditor
                                     editor={ClassicEditor}
-                                    onInit={editor => {
-                                        // You can store the "editor" and use when it is needed.
-                                        //console.log( 'Editor is ready to use!', editor );
-                                    }}
                                     onChange={(event, editor) => {
                                         const data = editor.getData();
                                         this.setState({
                                             comment: data
                                         })
-                                    }}
-                                    onBlur={(event, editor) => {
-                                        //console.log( 'Blur.', editor );
-                                    }}
-                                    onFocus={(event, editor) => {
-                                        //console.log( 'Focus.', editor );
                                     }}
                                 />
                             </div>
