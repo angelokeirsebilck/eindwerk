@@ -24,7 +24,7 @@ class AddCommentForm extends Component {
                                     editor={ClassicEditor}
                                     class={'form-control' + (this.props.errors.comment && this.props.touched.comment ? ' is-invalid' : '')}
                                     // data= {this.props.errors.comment && this.props.touched.comment ? '' : this.props.initalValues.comment}
-                                    data= {this.props.initialValues.comment}
+                                    data= {this.props.values.comment}
                                     onInit={ editor => {
                                         // You can store the "editor" and use when it is needed.
                                         //this.props.setCommentEditor(editor);

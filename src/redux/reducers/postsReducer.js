@@ -4,7 +4,8 @@ const initialState = {
     commentEditor: undefined,
     editCommentEditor: undefined,
     post: [],
-    postIsLoading: true
+    postIsLoading: true,
+    postsIsLoading: true
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -45,6 +46,16 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postIsLoading: action.payload
+            }
+        case 'SET_POSTS_IS_LOADING_FALSE':
+            return {
+                ...state,
+                postsIsLoading: action.payload
+            }
+        case 'SET_POSTS_IS_LOADING_TRUE':
+            return {
+                ...state,
+                postsIsLoading: action.payload
             }
     }
 

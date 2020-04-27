@@ -7,6 +7,7 @@ export const loadPosts = (pageNumber) => {
                 type: "LOAD_POSTS",
                 payload: response.data
             });
+            dispatch(setPostsIsLoadingFalse());
         }).catch(function (error) {
             // handle error
             console.log(error);
@@ -59,6 +60,20 @@ export const setPostIsLoadingFalse = () => {
 export const setPostIsLoadingTrue = () => {
     return {
         type: 'SET_POST_IS_LOADING_TRUE',
+        payload: true
+    }
+}
+
+export const setPostsIsLoadingFalse = () => {
+    return {
+        type: 'SET_POSTS_IS_LOADING_FALSE',
+        payload: false
+    }
+}
+
+export const setPostsIsLoadingTrue = () => {
+    return {
+        type: 'SET_POSTS_IS_LOADING_TRUE',
         payload: true
     }
 }

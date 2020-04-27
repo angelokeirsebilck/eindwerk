@@ -69,7 +69,6 @@ class PostDetails extends Component {
         this.props.setPostIsLoadingTrue();
         this.props.unsetPost();
         this.props.loadPost(this.props.match.params.post);
-
     }
 
     // onNewCommentHandler = () => {
