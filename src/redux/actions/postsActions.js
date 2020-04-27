@@ -29,6 +29,13 @@ export const loadPageCount = () => {
     }
 }
 
+export const setCommentEditor = (editor) => {
+    return{
+        type: 'SET_COMMENT_EDITOR',
+        payload: editor
+    }
+}
+
 export const addPostAction = (postValues) => {
     API.post("api/posts", postValues).then(response => {
 

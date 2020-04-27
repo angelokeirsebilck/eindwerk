@@ -1,6 +1,7 @@
 const initialState = {
     posts: [],
-    pageCount: ''
+    pageCount: '',
+    commentEditor: undefined
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pageCount: action.payload.last_page
+            }
+        case 'SET_COMMENT_EDITOR':
+            return {
+                ...state,
+                commentEditor: action.payload
             }
     }
 
