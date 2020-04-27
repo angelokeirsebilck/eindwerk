@@ -1,8 +1,8 @@
 const initialState = {
-    post: '',
+    post: [],
     isLoading: true,
     addComment: false,
-    comment: ''
+    comment: []
 };
 
 const postDetailsReducer = (state = initialState, action) => {
@@ -11,6 +11,11 @@ const postDetailsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 post: action.payload
+            }
+        case 'EMPTY_POST':
+            return {
+                ...state,
+                post: []
             }
         case 'SET_LOADING_FALSE':
             return {

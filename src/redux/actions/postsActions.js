@@ -29,8 +29,42 @@ export const loadPageCount = () => {
     }
 }
 
+export const loadPost = (postId) => {
+    return function (dispatch) {
+        API.get("api/posts/" + postId).then(response => {
+            dispatch({
+                type: "LOAD_POST_DETAILS",
+                payload: response.data
+            });
+            dispatch(setPostIsLoadingFalse());
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+    }
+}
+export const unsetPost = () => {
+    return {
+        type: "UNSET_POST_DETAILS"
+    }
+}
+
+export const setPostIsLoadingFalse = () => {
+    return {
+        type: 'SET_POST_IS_LOADING_FALSE',
+        payload: false
+    }
+}
+
+export const setPostIsLoadingTrue = () => {
+    return {
+        type: 'SET_POST_IS_LOADING_TRUE',
+        payload: true
+    }
+}
+
 export const setCommentEditor = (editor) => {
-    return{
+    return {
         type: 'SET_COMMENT_EDITOR',
         payload: editor
     }

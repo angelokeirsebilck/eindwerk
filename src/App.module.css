@@ -5,3 +5,34 @@
 .App{
     font-family: 'Montserrat';
 }
+
+:global .Button_primary{
+    padding:10px 16px;
+    border-radius: 0px;
+    border: 0px;
+    color: white !important;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    background-color: #f9a373;
+    transition: .4s all;
+    font-family: 'Montserrat';
+    text-transform: lowercase;
+    display: inline-block;
+}
+
+:global .Button_primary:hover{
+    background-color: #00255a;
+    color: white;
+    text-decoration: none;
+}
+
+:global .Button_secondary{
+    color: blue;
+    background: transparent;
+    color: grey;
+    border: none;
+}

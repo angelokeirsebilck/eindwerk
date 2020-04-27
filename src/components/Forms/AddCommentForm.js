@@ -23,10 +23,11 @@ class AddCommentForm extends Component {
                                     name="comment"
                                     editor={ClassicEditor}
                                     class={'form-control' + (this.props.errors.comment && this.props.touched.comment ? ' is-invalid' : '')}
-                                    data= {this.props.errors.title && this.props.touched.title ? '' : this.props.values.wysiwyg}
+                                    // data= {this.props.errors.comment && this.props.touched.comment ? '' : this.props.initalValues.comment}
+                                    data= {this.props.initialValues.comment}
                                     onInit={ editor => {
                                         // You can store the "editor" and use when it is needed.
-                                        this.props.setCommentEditor(editor);
+                                        //this.props.setCommentEditor(editor);
                                     } }
                                     onChange={(event, editor) => {
                                         const data = editor.getData();
@@ -34,7 +35,7 @@ class AddCommentForm extends Component {
                                     }}
                                 />
                                 <ErrorMessage name="comment" component="div" style={this.props.errors.comment && this.props.touched.comment ? displayBlock : ''} className="invalid-feedback " />
-                                <input className="Button_primary mt-4" type="submit" value="add comment"></input>
+                                <input className="Button_primary mt-4" type="submit" value={this.props.buttonValue}></input>
                             </div>
                         </div>
                     </div>

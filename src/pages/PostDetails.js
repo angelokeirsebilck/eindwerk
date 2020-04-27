@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { API } from "../config/API";
 import PostDetailsItem from '../components/Post/PostDetailsItem';
 import Comment from '../components/Comment/Comment';
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { loadPost, setNewCommentTrue, setNewCommentFalse } from '../redux/actions/postDetailsActions';
+import { loadPost, unsetPost, setPostIsLoadingTrue } from '../redux/actions/postsActions';
 import { Formik } from 'formik';
 import AddCommentForm from '../components/Forms/AddCommentForm';
 import * as Yup from 'yup';
@@ -14,23 +12,23 @@ class PostDetails extends Component {
 
     state = {
         comment: [],
-        post: [],
+        // post: [],
         isLoading: true,
         addComment: false,
     }
 
-    loadPost = (postId) => {
-        API.get("api/posts/" + postId).then(response => {
-            this.setState({
-                post: response.data,
-                isLoading: false
-            })
+    // loadPost = (postId) => {
+    //     API.get("api/posts/" + postId).then(response => {
+    //         this.setState({
+    //             post: response.data,
+    //             isLoading: false
+    //         })
 
-        }).catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-    }
+    //     }).catch(function (error) {
+    //         // handle error
+    //         console.log(error);
+    //     })
+    // }
 
     onDeletePostHandler = () => {
         API.delete("api/posts/" + this.props.match.params.post).then(response => {
@@ -41,14 +39,15 @@ class PostDetails extends Component {
         });
     }
 
-    onAddCommentHandler = (values) => {
+    onAddCommentHandler = (values,formikBag) => {
         let comment = {
-            blog_post_id: this.state.post.id,
+            blog_post_id: this.props.post.id,
             body: values.comment
         }
         API.post("api/comments", comment).then(response => {
-            this.loadPost(this.state.post.id);
-            this.props.commentEditor.setData("");
+            this.props.loadPost(this.props.post.id);
+            //this.props.commentEditor.setData("");
+            this.forceUpdate();
         }).catch(function (error) {
             // handle error
             console.log(error);
@@ -61,8 +60,10 @@ class PostDetails extends Component {
     })
 
     componentDidMount() {
-        //this.props.loadPost(this.props.match.params.post);
-        this.loadPost(this.props.match.params.post);
+        this.props.setPostIsLoadingTrue();
+        this.props.unsetPost();
+        this.props.loadPost(this.props.match.params.post);
+
     }
 
     // onNewCommentHandler = () => {
@@ -108,7 +109,8 @@ class PostDetails extends Component {
         //     }
         // }
 
-        const { id, title, body, created_at, user_id, user, comments_count, comments } = this.state.post;
+        console.log("test force update component did mount");
+        const { id, title, body, created_at, user_id, user, comments_count, comments } = this.props.post;
         let date = new Date(created_at);
         let dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
         let sortedComments = [];
@@ -123,7 +125,7 @@ class PostDetails extends Component {
 
         return (
             <div>
-                {this.state.isLoading ?
+                {this.props.postIsLoading ?
                     <div className="container">Post still loading..</div>
                     :
                     <div className="container">
@@ -142,10 +144,12 @@ class PostDetails extends Component {
                                 validationSchema={this.validationShema}
                                 validateOnChange={false}
                                 initialValues={{
-                                    comment: ''
+                                    comment: 'test'
                                 }}
+                                render={props =>
+                                    <AddCommentForm  {...props} buttonValue="add comment" />
+                                }
                             >
-                                {props => <AddCommentForm {...props} />}
                             </Formik>
                             : ""
                         }
@@ -170,13 +174,17 @@ class PostDetails extends Component {
 const MapStateToProps = (state) => {
     return {
         user: state.auth.user,
-        commentEditor: state.posts.commentEditor
+        commentEditor: state.posts.commentEditor,
+        post: state.posts.post,
+        postIsLoading: state.posts.postIsLoading
     }
 }
 
 const MapDispatchToProps = (dispatch) => {
     return {
-
+        loadPost: (postId) => dispatch(loadPost(postId)),
+        unsetPost: () => dispatch(unsetPost()),
+        setPostIsLoadingTrue: () => dispatch(setPostIsLoadingTrue())
     }
 }
 

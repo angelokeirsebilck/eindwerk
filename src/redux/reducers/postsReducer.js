@@ -1,7 +1,10 @@
 const initialState = {
     posts: [],
     pageCount: '',
-    commentEditor: undefined
+    commentEditor: undefined,
+    editCommentEditor: undefined,
+    post: [],
+    postIsLoading: true
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -22,6 +25,26 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 commentEditor: action.payload
+            }
+        case 'LOAD_POST_DETAILS':
+            return {
+                ...state,
+                post: action.payload
+            }
+        case 'UNSET_POST_DETAILS':
+            return {
+                ...state,
+                post: []
+            }
+        case 'SET_POST_IS_LOADING_FALSE':
+            return {
+                ...state,
+                postIsLoading: action.payload
+            }
+        case 'SET_POST_IS_LOADING_TRUE':
+            return {
+                ...state,
+                postIsLoading: action.payload
             }
     }
 
