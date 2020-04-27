@@ -161,7 +161,7 @@ class PostDetails extends Component {
                                     body={c.body}
                                     created_at={c.created_at}
                                     user={c.user}
-                                    loadPost={this.loadPost}
+                                    postId = {this.props.post.id}
                                 />
                             ))}
                         </div>

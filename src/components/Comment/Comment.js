@@ -16,32 +16,34 @@ class Comment extends Component {
     state = {
         editing: false,
         id: undefined,
-        body: ''
+        body: '',
+        postId: undefined
     }
 
     componentDidMount() {
 
         this.setState({
             body: this.props.body,
-            id: this.props.id
+            id: this.props.id,
+            postId: this.props.postId
         })
     }
 
     onEditCommentHandler = (values) => {
-        this.props.setPostIsLoadingTrue();
+
         const { id } = this.state;
         let comment = {
             id: id,
             body: values.comment
         }
-        this.props.unsetPost();
 
         API.put("api/comments/" + id, comment).then(response => {
             this.setState({
                 editing: false
             })
-
-            this.props.loadPost(this.state.id);
+            this.props.setPostIsLoadingTrue();
+            this.props.unsetPost();
+            this.props.loadPost(this.state.postId);
         }).catch(function (error) {
             // handle error
             console.log(error);
@@ -78,8 +80,7 @@ class Comment extends Component {
     onDeleteHandler = () => {
         const { id } = this.state;
         API.delete("api/comments/" + id).then(response => {
-            //this.props.loadPost(this.props.postId)
-
+            this.props.loadPost(this.state.postId)
         }).catch(function (error) {
             // handle error
             console.log(error);
