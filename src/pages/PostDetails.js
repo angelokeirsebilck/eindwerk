@@ -7,6 +7,7 @@ import { loadPost, unsetPost, setPostIsLoadingTrue } from '../redux/actions/post
 import { Formik } from 'formik';
 import AddCommentForm from '../components/Forms/AddCommentForm';
 import * as Yup from 'yup';
+import Loader from '../components/Loader/Loader';
 
 class PostDetails extends Component {
 
@@ -15,6 +16,9 @@ class PostDetails extends Component {
         // post: [],
         isLoading: true,
         addComment: false,
+        initialValues:{
+            comment: ''
+        }
     }
 
     // loadPost = (postId) => {
@@ -39,15 +43,17 @@ class PostDetails extends Component {
         });
     }
 
-    onAddCommentHandler = (values,formikBag) => {
+    onAddCommentHandler = (values,props) => {
         let comment = {
             blog_post_id: this.props.post.id,
             body: values.comment
         }
         API.post("api/comments", comment).then(response => {
             this.props.loadPost(this.props.post.id);
-            //this.props.commentEditor.setData("");
-            this.forceUpdate();
+            props.resetForm({
+                comment: ''
+            })
+
         }).catch(function (error) {
             // handle error
             console.log(error);
@@ -109,7 +115,12 @@ class PostDetails extends Component {
         //     }
         // }
 
-        console.log("test force update component did mount");
+        const loaderStyle = {
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '24px'
+        }
+
         const { id, title, body, created_at, user_id, user, comments_count, comments } = this.props.post;
         let date = new Date(created_at);
         let dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
@@ -126,7 +137,7 @@ class PostDetails extends Component {
         return (
             <div>
                 {this.props.postIsLoading ?
-                    <div className="container">Post still loading..</div>
+                    <div className="container" style={loaderStyle}><Loader /></div>
                     :
                     <div className="container">
                         <PostDetailsItem
@@ -144,7 +155,7 @@ class PostDetails extends Component {
                                 validationSchema={this.validationShema}
                                 validateOnChange={false}
                                 initialValues={{
-                                    comment: 'test'
+                                    comment: ''
                                 }}
                                 render={props =>
                                     <AddCommentForm  {...props} buttonValue="add comment" />

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { loadPosts, loadPageCount } from '../redux/actions/postsActions';
 import Post from '../components/Post/Post';
 import ReactPaginate from 'react-paginate';
+import Loader from '../components/Loader/Loader';
 
 class Home extends Component {
 
@@ -13,42 +14,55 @@ class Home extends Component {
     handlePageClick = data => {
         //this.props.loadPosts(this.props.pageCount - data.selected);
         this.props.loadPosts(data.selected + 1);
-      };
+    };
 
     render() {
         const { posts } = this.props;
-        let sortedPosts = posts.sort((a,b) =>{
+        let sortedPosts = posts.sort((a, b) => {
             let dateA = new Date(a.created_at);
             let dateB = new Date(b.created_at);
             return dateB - dateA;
         })
+
+        const loaderStyle = {
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '24px'
+        }
+
+        let homeContent = <div className="container">
+            <ReactPaginate previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={this.props.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.handlePageClick}
+                containerClassName={'pagination'}
+                subContainerClassName={'pages pagination'}
+                activeClassName={'active'}>
+            </ReactPaginate>
+            {sortedPosts.map(p => (
+                <Post
+                    key={p.id}
+                    id={p.id}
+                    title={p.title}
+                    body={p.body}
+                    created_at={p.created_at}
+                    updated_at={p.updated_at}
+                    user={p.user}
+                    comments_count={p.comments_count}
+                />
+            ))}
+        </div>;
+
         return (
-            <div className="container">
-                <ReactPaginate  previousLabel={'previous'}
-                                nextLabel={'next'}
-                                breakLabel={'...'}
-                                breakClassName={'break-me'}
-                                pageCount={this.props.pageCount}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
-                                onPageChange={this.handlePageClick}
-                                containerClassName={'pagination'}
-                                subContainerClassName={'pages pagination'}
-                                activeClassName={'active'}>
-                </ReactPaginate>
-                {sortedPosts.map(p => (
-                    <Post
-                        key={p.id}
-                        id={p.id}
-                        title={p.title}
-                        body={p.body}
-                        created_at={p.created_at}
-                        updated_at={p.updated_at}
-                        user={p.user}
-                        comments_count={p.comments_count}
-                    />
-                ))}
+            <div>
+                {this.props.postsIsLoading ? <div className="container" style={loaderStyle}><Loader /></div> :
+                    homeContent}
             </div>
+
         )
     }
 }
@@ -56,7 +70,8 @@ class Home extends Component {
 const MapStateToProps = (state) => {
     return {
         posts: state.posts.posts,
-        pageCount : state.posts.pageCount
+        pageCount: state.posts.pageCount,
+        postsIsLoading: state.posts.postsIsLoading
     }
 }
 
