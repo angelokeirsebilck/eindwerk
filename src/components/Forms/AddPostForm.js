@@ -35,7 +35,7 @@ export default class AddPostForm extends Component {
                                     name="wysiwyg"
                                     editor={ClassicEditor}
                                     class={'form-control' + (this.props.errors.body && this.props.touched.body ? ' is-invalid' : '')}
-                                    data= {this.props.errors.title && this.props.touched.body ? '' : this.props.values.body}
+                                    data= {this.props.errors.body && this.props.touched.body ? '' : this.props.values.body}
                                     onChange={(event, editor) => {
                                         const data = editor.getData();
                                         this.props.setFieldValue("body", data);

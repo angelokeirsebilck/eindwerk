@@ -1,6 +1,6 @@
 import { API } from '../../config/API';
 
-export const loginAction = (loginValues) => dispatch => {
+export const loginAction = (loginValues,history) => dispatch => {
     API.post("oauth/token", loginValues).then(response => {
         // Als die call lukt doen we 3 dingen:
 
@@ -16,6 +16,7 @@ export const loginAction = (loginValues) => dispatch => {
         // Na het juist instellen van alles kunnen we gaan ophalen wie er is ingelogd om dit dan weer te geven op
         // de pagina
         dispatch(setUserData());
+        history.push("/");
     });
 }
 

@@ -15,7 +15,7 @@ class Login extends Component {
             "password": values.password,
         }
 
-        this.props.loginAction(loginValues);
+        this.props.loginAction(loginValues,this.props.history);
     }
 
     validationShema = Yup.object().shape({
@@ -51,7 +51,7 @@ const MapStateToProps = (state) => {
 
   const MapDispatchToProps = (dispatch) => {
     return {
-      loginAction: (loginValues) => dispatch(loginAction(loginValues))
+      loginAction: (loginValues,history) => dispatch(loginAction(loginValues,history))
     }
   }
 
