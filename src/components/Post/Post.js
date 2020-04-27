@@ -18,8 +18,12 @@ export default class Post extends Component {
                 <div className={classes.Post}>
                     <div className={classes.Post_date}>Posted by <Link to={profileLink} className={classes.Post_username}> <span > {user.first_name}</span></Link> at {dateFormat}</div>
                     <div className={classes.Post_title}>{title}</div>
+
                     <div className={classes.Post_body}>
-                        <Truncate lines={2}>{body}</Truncate>
+                        <Truncate lines={2}><div
+        dangerouslySetInnerHTML={{
+            __html: body
+        }}></div></Truncate>
                     </div>
                 </div>
             </Link>

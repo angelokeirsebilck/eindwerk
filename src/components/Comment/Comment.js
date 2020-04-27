@@ -117,7 +117,10 @@ class Comment extends Component {
             </Formik>
         }
         else {
-            commentContent = <div>{this.props.body}</div>;
+            commentContent = <div
+            dangerouslySetInnerHTML={{
+                __html: this.props.body
+            }}></div>;
         }
 
         return (

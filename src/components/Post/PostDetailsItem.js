@@ -79,14 +79,20 @@ class PostDetailsItem extends Component {
             </Formik>
         }
         else {
-            postContent =   <div>
-                                <div className={classes.Post_title}>
-                                    {title}
-                                </div>
-                                <div className={classes.Post_body}>
-                                    {body}
-                                </div>
-                            </div>;
+            postContent = <div>
+                <div className={classes.Post_title}>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: title
+                        }}></div>
+                </div>
+                <div className={classes.Post_body}>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: body
+                        }}></div>
+                </div>
+            </div>;
         }
         let editBlock;
         if (user != undefined && loggedUser != undefined) {
@@ -100,6 +106,7 @@ class PostDetailsItem extends Component {
                 <div className={classes.Post_date}>Posted by <Link to={profileLink} className={classes.Post_username}> <span > {user.first_name}</span></Link> at {created_at}
                     {editBlock}
                 </div>
+
                 {postContent}
             </div>
         )
