@@ -1,8 +1,17 @@
 .Comment{
-    background: grey;
+    background-color: #fcfcf8;
+    margin-bottom: 10px;
+    padding: 24px;
     margin-top: 24px;
 }
 
 .Comment_actions{
 
+}
+
+.Comment_avatar{
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
 }
