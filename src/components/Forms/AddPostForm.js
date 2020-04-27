@@ -34,18 +34,18 @@ export default class AddPostForm extends Component {
                                 <CKEditor
                                     name="wysiwyg"
                                     editor={ClassicEditor}
-                                    class={'form-control' + (this.props.errors.title && this.props.touched.title ? ' is-invalid' : '')}
-                                    data= {this.props.errors.title && this.props.touched.title ? '' : this.props.values.wysiwyg}
+                                    class={'form-control' + (this.props.errors.body && this.props.touched.body ? ' is-invalid' : '')}
+                                    data= {this.props.errors.title && this.props.touched.body ? '' : this.props.values.body}
                                     onChange={(event, editor) => {
                                         const data = editor.getData();
-                                        this.props.setFieldValue("wysiwyg", data);
+                                        this.props.setFieldValue("body", data);
                                     }}
                                 />
-                            <ErrorMessage name="wysiwyg" component="div" style={this.props.errors.title && this.props.touched.title ? displayBlock : ''} className="invalid-feedback " />
+                            <ErrorMessage name="body" component="div" style={this.props.errors.body && this.props.touched.body ? displayBlock : ''} className="invalid-feedback " />
                             </div>
                         </div>
                     </div>
-                    <input className="btn btn-primary float-right" type="submit" value="Submit"></input>
+                    <input className="Button_primary mt-4" type="submit" value={this.props.buttonValue}></input>
                 </Form>
             </div>
         )

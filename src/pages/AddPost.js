@@ -4,34 +4,33 @@ import AddPostForm from '../components/Forms/AddPostForm'
 import { addPostAction } from '../redux/actions/postsActions'
 import { connect } from 'react-redux'
 import * as Yup from 'yup';
+import { withRouter } from 'react-router-dom'
+import { API } from '../config/API';
 
 class AddPost extends Component {
 
-    subimitHandler = (values) => {
+    onAddPostHandler = (values) => {
         const addPostValues = {
-            "title": document.querySelector("[name=title]").value,
-            "body": document.querySelector("[name=body]").value,
+            "title": values.title,
+            "body": values.body
         }
-        this.props.addPostAction(addPostValues);
+        this.addPostAction(addPostValues);
+        this.props.history.push("/");
     }
 
-    validateHandler = (values) => {
-        const errors = {};
-        const requiredFields = ["title", "wysiwyg"];
+    addPostAction = (postValues) => {
+        API.post("api/posts", postValues).then(response => {
 
-        requiredFields.forEach(field => {
-            if (!values[field] || values[field] == "") {
-                errors[field] = "This field is required.";
-            }
+        }).catch(function (error) {
+            // handle error
+            console.log(error);
         });
-
-        return errors
     }
 
     validationShema = Yup.object().shape({
         title: Yup.string()
             .required('Title is required'),
-        wysiwyg: Yup.string()
+        body: Yup.string()
             .required('Content is required'),
     })
 
@@ -39,14 +38,16 @@ class AddPost extends Component {
         return (
             <div className="container">
                 <Formik
-                    onSubmit={this.subimitHandler}
+                    onSubmit={this.onAddPostHandler}
                     validationSchema={this.validationShema}
                     initialValues={{
                         title: '',
-                        wysiwyg: ''
+                        body: ''
                     }}
+                    render={props =>
+                        <AddPostForm  {...props} buttonValue="add post" />
+                    }
                 >
-                    {props => <AddPostForm {...props} />}
                 </Formik>
             </div>
         )
@@ -61,8 +62,8 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        addPostAction: (postValues) => dispatch(addPostAction(postValues))
+        // addPostAction: (postValues) => dispatch(addPostAction(postValues))
     }
 }
 
-export default connect(MapStateToProps, MapDispatchToProps)(AddPost);
+export default withRouter(connect(MapStateToProps, MapDispatchToProps)(AddPost));
