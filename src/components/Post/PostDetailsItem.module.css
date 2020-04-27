@@ -1,0 +1,12 @@
+.Post{
+    background-color: #fcfcf8;
+    margin-bottom: 10px;
+    padding: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.Post_title{
+    font-size: 24px;
+    transition: .4s all;
+}
