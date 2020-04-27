@@ -93,12 +93,6 @@ class Comment extends Component {
         const dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
         const { body } = this.state;
         let editBlock = "";
-        // if (this.props.user != undefined && this.props.loggedUser != undefined) {
-        //     if (this.props.user.id == this.props.loggedUser.id) {
-        //         editBlock = <div>{!this.state.edit ? <button onClick={this.onEditHandler}>Edit</button> : <button onClick={this.onSaveHandler}>Save</button>}
-        //             <button onClick={this.onDeleteHandler}>Delete</button> </div>;
-        //     }
-        // }
 
         if (this.props.user != undefined && this.props.loggedUser != undefined) {
             if (this.props.user.id == this.props.loggedUser.id) {

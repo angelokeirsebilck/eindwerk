@@ -85,11 +85,11 @@ export const setCommentEditor = (editor) => {
     }
 }
 
-export const addPostAction = (postValues) => {
-    API.post("api/posts", postValues).then(response => {
+// export const addPostAction = (postValues) => {
+//     API.post("api/posts", postValues).then(response => {
 
-    }).catch(function (error) {
-        // handle error
-        console.log(error);
-    });
-}
+//     }).catch(function (error) {
+//         // handle error
+//         console.log(error);
+//     });
+// }
