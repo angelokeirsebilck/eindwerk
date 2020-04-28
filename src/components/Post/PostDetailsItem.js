@@ -123,8 +123,12 @@ class PostDetailsItem extends Component {
         }
         return (
             <div className={classes.Post}>
-                <div>Posted by <Link to={profileLink} className={classes.Post_username}> <span > {user.first_name}</span></Link> at <span className={classes.Post_date}>{created_at}</span>
-                    {editBlock}
+                <div className={classes.Post_infoContainer}>
+
+                    <Link to={profileLink} className={classes.Post_link}>
+                        <span className={classes.Post_text}></span> Posted by <span className={classes.Post_username}>  {user.first_name}</span>
+                    </Link>
+                    <span className={classes.Post_date}> <span className={classes.Post_text}>at</span> {created_at} {editBlock}</span>
                 </div>
                 {postContent}
             </div>

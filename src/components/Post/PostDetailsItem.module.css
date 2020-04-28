@@ -14,6 +14,26 @@
 .Post_username{
     color: #f9a373;
     transition: .4s all;
+    margin-right: 5px;
+}
+
+.Post_infoContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.Post_link{
+    text-decoration: none;
+    color: #00255a;
+}
+
+.Post_link:hover{
+    text-decoration: none;
+    color: #00255a;
+}
+
+.Post_text{
+    color: #00255a;
 }
 
 .Post_date{
@@ -32,4 +52,14 @@
 .Post_icon--inActive{
     color: lightgray;
     pointer-events: none;
+}
+
+.Post_infoContainer{
+    display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+    .Post_infoContainer{
+        flex-direction: column;
+    }
 }
