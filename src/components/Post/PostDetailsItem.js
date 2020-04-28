@@ -9,6 +9,8 @@ import AddPostForm from '../Forms/AddPostForm';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { loadPost, unsetPost, setPostIsLoadingTrue } from '../../redux/actions/postsActions';
+import { MdDelete, MdModeEdit } from "react-icons/md";
+import { IconContext } from "react-icons";
 
 class PostDetailsItem extends Component {
 
@@ -64,6 +66,8 @@ class PostDetailsItem extends Component {
         const profileLink = '/profile/' + user.id;
         let postContent;
 
+        let btnStyle = ["Button_secondary"];
+
         if (this.state.editing) {
             postContent = <Formik
                 onSubmit={this.onEditPostHandler}
@@ -77,6 +81,8 @@ class PostDetailsItem extends Component {
                 }
             >
             </Formik>
+
+            btnStyle.push("Button--disabled");
         }
         else {
             postContent = <div>
@@ -97,16 +103,29 @@ class PostDetailsItem extends Component {
         let editBlock;
         if (user != undefined && loggedUser != undefined) {
             if (user.id == loggedUser.id) {
-                editBlock = <span><button className="Button_secondary" onClick={this.onEditHandler}>edit</button>
-                    <button className="Button_secondary" onClick={this.onDeleteHandler}>delete</button></span>;
+                editBlock = <span>
+                    <button className={btnStyle.join(" ")} onClick={this.onEditHandler}>
+                        <IconContext.Provider value=''>
+                            <div>
+                                <MdModeEdit size="24" />
+                            </div>
+                        </IconContext.Provider>
+                    </button>
+                    <button className="Button_secondary" onClick={this.onDeleteHandler}>
+                        <IconContext.Provider value=''>
+                            <div>
+                                <MdDelete size="24" />
+                            </div>
+                        </IconContext.Provider>
+                    </button>
+                </span>;
             }
         }
         return (
             <div className={classes.Post}>
-                <div className={classes.Post_date}>Posted by <Link to={profileLink} className={classes.Post_username}> <span > {user.first_name}</span></Link> at {created_at}
+                <div>Posted by <Link to={profileLink} className={classes.Post_username}> <span > {user.first_name}</span></Link> at <span className={classes.Post_date}>{created_at}</span>
                     {editBlock}
                 </div>
-
                 {postContent}
             </div>
         )

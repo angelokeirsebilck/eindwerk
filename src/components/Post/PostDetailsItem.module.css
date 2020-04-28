@@ -10,3 +10,26 @@
     font-size: 24px;
     transition: .4s all;
 }
+
+.Post_username{
+    color: #f9a373;
+    transition: .4s all;
+}
+
+.Post_date{
+    margin-right: 10px;
+}
+
+.Post_username:hover{
+    color: #00255a;
+    text-decoration: none;
+}
+
+.Post_icon{
+    color: #f9a373;
+}
+
+.Post_icon--inActive{
+    color: lightgray;
+    pointer-events: none;
+}
