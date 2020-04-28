@@ -10,6 +10,9 @@ import { loadPost, setPostIsLoadingTrue, unsetPost } from '../../redux/actions/p
 import AddCommentForm from '../Forms/AddCommentForm';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { MdDelete, MdModeEdit } from "react-icons/md";
+import { IconContext } from "react-icons";
+import { Link } from 'react-router-dom';
 
 class Comment extends Component {
 
@@ -88,20 +91,35 @@ class Comment extends Component {
     }
 
     render() {
-        const { created_at } = this.props;
+        const { created_at, user } = this.props;
         const date = new Date(created_at);
         const dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
         const { body } = this.state;
+        const profileLink = '/profile/' + user.id;
+        let btnStyle = ["Button_secondary"];
+        let commentContent;
         let editBlock = "";
 
         if (this.props.user != undefined && this.props.loggedUser != undefined) {
             if (this.props.user.id == this.props.loggedUser.id) {
-                editBlock = <span><button className="Button_secondary" onClick={this.onEditHandler}>edit</button>
-                    <button className="Button_secondary" onClick={this.onDeleteHandler}>delete</button></span>;
+                editBlock = <span>
+                    <button className={btnStyle.join(" ")} onClick={this.onEditHandler}>
+                        <IconContext.Provider value=''>
+                            <div>
+                                <MdModeEdit size="24" />
+                            </div>
+                        </IconContext.Provider>
+                    </button>
+                    <button className="Button_secondary" onClick={this.onDeleteHandler}>
+                        <IconContext.Provider value=''>
+                            <div>
+                                <MdDelete size="24" />
+                            </div>
+                        </IconContext.Provider>
+                    </button>
+                </span>;
             }
         }
-
-        let commentContent;
 
         if (this.state.editing) {
             commentContent = <Formik
@@ -115,12 +133,14 @@ class Comment extends Component {
                 }
             >
             </Formik>
+
+            btnStyle.push("Button--disabled");
         }
         else {
-            commentContent = <div
-            dangerouslySetInnerHTML={{
-                __html: this.props.body
-            }}></div>;
+            commentContent = <div className={classes.Comment_body}
+                dangerouslySetInnerHTML={{
+                    __html: this.props.body
+                }}></div>;
         }
 
         return (
@@ -151,9 +171,17 @@ class Comment extends Component {
                         }}
                     />
                 } */}
-                <img className={classes.Comment_avatar} src={this.props.user.avatar} alt="" />
-                <span className>{this.props.user.first_name}</span>
-                {editBlock}
+
+                <div className={classes.Comment_userContainer}>
+                    <img className={classes.Comment_avatar} src={this.props.user.avatar} alt="" />
+                    <div className={classes.Comment_infoContainer}>
+
+                        <Link to={profileLink} className={classes.Comment_link}>
+                         <span className={classes.Comment_text}></span> by <span className={classes.Comment_username}>  {user.first_name}</span>
+                        </Link>
+                        <span className={classes.Comment_date}> <span className={classes.Comment_text}>at</span> {dateFormat} {editBlock}</span>
+                    </div>
+                </div>
                 {commentContent}
             </div>
         )
