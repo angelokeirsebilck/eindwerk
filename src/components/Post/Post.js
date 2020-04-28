@@ -8,7 +8,7 @@ export default class Post extends Component {
 
     render() {
 
-        const { id ,title, body, created_at, updated_at, user, comments_count } = this.props;
+        const { id, title, body, created_at, updated_at, user, comments_count } = this.props;
         const date = new Date(created_at);
         const dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
         const link = "/posts/" + id;
@@ -18,12 +18,14 @@ export default class Post extends Component {
                 <div className={classes.Post}>
                     <div className={classes.Post_date}>Posted by <Link to={profileLink} className={classes.Post_username}> <span > {user.first_name}</span></Link> at {dateFormat}</div>
                     <div className={classes.Post_title}>{title}</div>
-
                     <div className={classes.Post_body}>
                         <Truncate lines={2}><div
-        dangerouslySetInnerHTML={{
-            __html: body
-        }}></div></Truncate>
+                            dangerouslySetInnerHTML={{
+                                __html: body
+                            }}></div></Truncate>
+                    </div>
+                    <div className={classes.Post_commentCount}>
+                        <span>{comments_count} {comments_count == 1 ? "Comment" : "Comments" }</span>
                     </div>
                 </div>
             </Link>
