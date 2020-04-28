@@ -8,6 +8,7 @@ import { Formik } from 'formik';
 import AddCommentForm from '../components/Forms/AddCommentForm';
 import * as Yup from 'yup';
 import Loader from '../components/Loader/Loader';
+import classes from './PostDetails.module.css'
 
 class PostDetails extends Component {
 
@@ -16,7 +17,7 @@ class PostDetails extends Component {
         // post: [],
         isLoading: true,
         addComment: false,
-        initialValues:{
+        initialValues: {
             comment: ''
         }
     }
@@ -43,7 +44,7 @@ class PostDetails extends Component {
         });
     }
 
-    onAddCommentHandler = (values,props) => {
+    onAddCommentHandler = (values, props) => {
         let comment = {
             blog_post_id: this.props.post.id,
             body: values.comment
@@ -71,59 +72,18 @@ class PostDetails extends Component {
         this.props.loadPost(this.props.match.params.post);
     }
 
-    // onNewCommentHandler = () => {
-    //     //this.props.setNewCommentTrue();
-    //     this.setState({
-    //         addComment: true
-    //     })
-    // }
-
-    // onAddCommentHandler = () => {
-    //     let comment = {
-    //         blog_post_id: this.props.post.id,
-    //         body: this.state.comment
-    //     }
-    //     API.post("api/comments", comment).then(response => {
-    //         // this.props.setNewCommentFalse();
-    //         // this.props.loadPost(this.props.post.id);
-    //         this.setState({
-    //             addComment: true
-    //         })
-    //         this.loadPost(this.state.post.id)
-    //     });
-    // }
-
     render() {
-        // let post;
-        // let dateFormat;
-        // let sortedComments;
-        // let comments;
-
-        // if(this.props.post != ''){
-        //     post = this.props.post;
-        //     comments = post.comments;
-        //     let date = new Date(post.created_at);
-        //     dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-
-        //     if (comments != undefined) {
-        //         sortedComments = comments.sort((a, b) => {
-        //             let dateA = new Date(a.created_at);
-        //             let dateB = new Date(b.created_at);
-        //             return dateB - dateA;
-        //         })
-        //     }
-        // }
-
         const loaderStyle = {
             display: 'flex',
             justifyContent: 'center',
             marginTop: '24px'
         }
 
-        const { id, title, body, created_at, user_id, user, comments_count, comments } = this.props.post;
+        const { id, title, body, created_at, user_id, user, comments } = this.props.post;
         let date = new Date(created_at);
         let dateFormat = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
         let sortedComments = [];
+        let commentsContent = "";
 
         if (comments) {
             sortedComments = comments.sort((a, b) => {
@@ -131,6 +91,22 @@ class PostDetails extends Component {
                 let dateB = new Date(b.created_at);
                 return dateB - dateA;
             })
+
+            if (comments.length > 0 && comments !== undefined) {
+                commentsContent = <div className="Comments">
+                    <div className={classes.PostDetails_title}>Comments</div>
+                    {sortedComments.map(c => (
+                        <Comment
+                            key={c.id}
+                            id={c.id}
+                            body={c.body}
+                            created_at={c.created_at}
+                            user={c.user}
+                            postId={this.props.post.id}
+                        />
+                    ))}
+                </div>;
+            }
         }
 
         return (
@@ -138,7 +114,8 @@ class PostDetails extends Component {
                 {this.props.postIsLoading ?
                     <div className="container" style={loaderStyle}><Loader /></div>
                     :
-                    <div className="container">
+                    <div className="container mt-4">
+                        <div className={classes.PostDetails_title}>Post</div>
                         <PostDetailsItem
                             id={id}
                             title={title}
@@ -146,7 +123,6 @@ class PostDetails extends Component {
                             created_at={dateFormat}
                             user_id={user_id}
                             user={user}
-                            comments_count={comments_count}
                         />
                         {this.props.user ?
                             <Formik
@@ -163,18 +139,7 @@ class PostDetails extends Component {
                             </Formik>
                             : ""
                         }
-                        <div className="Comments">
-                            {sortedComments.map(c => (
-                                <Comment
-                                    key={c.id}
-                                    id={c.id}
-                                    body={c.body}
-                                    created_at={c.created_at}
-                                    user={c.user}
-                                    postId = {this.props.post.id}
-                                />
-                            ))}
-                        </div>
+                        {commentsContent}
                     </div>}
             </div>
         )
