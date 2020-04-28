@@ -31,8 +31,18 @@
 }
 
 :global .Button_secondary{
-    color: blue;
     background: transparent;
-    color: grey;
+    color: #f9a373;
     border: none;
+    padding: 0;
+    transition: .4s all;
+    transform: translateY(-4px);
+}
+:global .Button_secondary:hover{
+    color: #00255a;
+}
+
+:global .Button--disabled{
+    pointer-events: none;
+    color: lightgrey;
 }
