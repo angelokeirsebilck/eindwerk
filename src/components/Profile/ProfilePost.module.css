@@ -1,50 +1,40 @@
-.Post{
+.ProfilePost{
     background-color: #fcfcf8;
     margin-bottom: 10px;
     padding: 24px;
 }
 
-.Post_link{
+.ProfilePost_link{
     color: #00255a;
 }
 
-.Post_commentCount{
+.ProfilePost_commentCount{
     padding-top: 5px;
 }
 
-.Post_link:hover{
+.ProfilePost_link:hover{
     color: #00255a;
     text-decoration: none;
 }
 
-.Post_link:hover {
+.ProfilePost_link:hover {
     color: #00255a;
     text-decoration: none;
 }
 
-.Post_link:hover .Post_title {
+.ProfilePost_link:hover .ProfilePost_title {
     color: #f9a373;
 }
 
-.Post_link:hover .Post_body {
+.ProfilePost_link:hover .ProfilePost_body {
     color: #f9a373;
 }
 
-.Post_title{
+.ProfilePost_title{
     font-size: 24px;
     transition: .4s all;
 }
 
-.Post_body{
+.ProfilePost_body{
     transition: .4s all;
-}
-
-.Post_username{
-    color: #f9a373;
-    transition: .4s all;
-}
-
-.Post_username:hover{
-    color: #00255a;
-    text-decoration: none;
 }

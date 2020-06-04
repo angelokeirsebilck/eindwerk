@@ -1,0 +1,18 @@
+.ProfileComment{
+    background-color: #fcfcf8;
+    margin-bottom: 10px;
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.ProfileComment_text{
+    color: #00255a;
+}
+
+.ProfileComment_date{
+    margin-right: 10px;
+}
+.ProfileComment_body p:last-of-type{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
