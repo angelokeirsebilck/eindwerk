@@ -24,5 +24,6 @@ export default class Button extends Component {
 
 Button.propTypes = {
     text: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired
+    link: PropTypes.string.isRequired,
+    mobile: PropTypes.bool
 };

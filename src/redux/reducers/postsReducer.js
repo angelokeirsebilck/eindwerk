@@ -1,6 +1,6 @@
 const initialState = {
     posts: [],
-    pageCount: '',
+    pageCount: 0,
     commentEditor: undefined,
     editCommentEditor: undefined,
     post: [],

@@ -153,9 +153,12 @@ const MapDispatchToProps = (dispatch) => {
 export default withRouter(connect(MapStateToProps, MapDispatchToProps)(PostDetailsItem));
 
 PostDetailsItem.propTypes = {
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,
-    user_id: PropTypes.number.isRequired
+    user_id: PropTypes.number.isRequired,
+    user: PropTypes.object.isRequired,
+    comments: PropTypes.object.isRequired
 };
 
