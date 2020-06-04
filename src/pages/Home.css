@@ -1,0 +1,38 @@
+.Pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.Pagination_item,
+.Pagination_next,
+.Pagination_prev{
+    padding-right: 10px;
+    cursor: pointer;
+    transition: .4s all;
+}
+
+.Pagination_item:hover .Pagination_link{
+    color: #f9a373;
+}
+.Pagination_next:hover .Pagination_nextLink{
+    color: #f9a373;
+}
+.Pagination_prev:hover .Pagination_prevLink{
+    color: #f9a373;
+}
+
+.Pagination_link,
+.Pagination_prevLink,
+.Pagination_nextLink{
+    transition: .4s all;
+}
+
+.Pagination_isActive{
+    color: #f9a373;
+}
+.disabled{
+    pointer-events: none;
+    opacity: .3;
+}

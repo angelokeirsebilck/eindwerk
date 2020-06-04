@@ -4,6 +4,7 @@ import { loadPosts, loadPageCount } from '../redux/actions/postsActions';
 import Post from '../components/Post/Post';
 import ReactPaginate from 'react-paginate';
 import Loader from '../components/Loader/Loader';
+import './Home.css';
 
 class Home extends Component {
 
@@ -30,18 +31,25 @@ class Home extends Component {
             marginTop: '24px'
         }
 
-        let homeContent = <div className="container">
+        let homeContent =
+         <div className="container">
             <ReactPaginate previousLabel={'previous'}
                 nextLabel={'next'}
                 breakLabel={'...'}
                 breakClassName={'break-me'}
                 pageCount={this.props.pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
+                pageClassName={'Pagination_item'}
+                pageLinkClassName={'Pagination_link'}
+                previousClassName={'Pagination_prev'}
+                nextClassName={'Pagination_next'}
+                previousLinkClassName={'Pagination_prevLink'}
+                nextLinkClassName={'Pagination_nextLink'}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={3}
                 onPageChange={this.handlePageClick}
-                containerClassName={'pagination'}
+                containerClassName={'Pagination'}
                 subContainerClassName={'pages pagination'}
-                activeClassName={'active'}>
+                activeClassName={'Pagination_isActive'}>
             </ReactPaginate>
             {sortedPosts.map(p => (
                 <Post
