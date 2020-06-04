@@ -30,7 +30,7 @@ class NavBar extends Component {
 
         let isLoggedIn = false;
 
-        if (this.props.user != undefined) {
+        if (this.props.user != undefined ) {
             isLoggedIn = true;
         }
 
